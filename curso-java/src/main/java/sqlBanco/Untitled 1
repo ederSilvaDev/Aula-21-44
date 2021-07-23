@@ -1,0 +1,40 @@
+CREATE DATABASE postgres
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Portuguese_Brazil.1252'
+    LC_CTYPE = 'Portuguese_Brazil.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+COMMENT ON DATABASE postgres
+    IS 'default administrative connection database';
+
+
+CREATE TABLE public.model_login
+(
+    id integer NOT NULL DEFAULT nextval('model_login_id_seq'::regclass),
+    login character varying(200) COLLATE pg_catalog."default",
+    senha character varying(200) COLLATE pg_catalog."default",
+    nome character varying(200) COLLATE pg_catalog."default",
+    snome character varying(200) COLLATE pg_catalog."default",
+    cpf character varying(200) COLLATE pg_catalog."default",
+    email character varying(200) COLLATE pg_catalog."default",
+    cidade character varying(200) COLLATE pg_catalog."default",
+    estado character varying(200) COLLATE pg_catalog."default",
+    cep character varying(200) COLLATE pg_catalog."default",
+    CONSTRAINT model_login_pkey PRIMARY KEY (id),
+    CONSTRAINT login_unique UNIQUE (login)
+)
+
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.model_login
+    OWNER to postgres;
+    
+INSERT INTO public.model_login(
+	login, senha)
+	VALUES ('admin', 'admin');    
