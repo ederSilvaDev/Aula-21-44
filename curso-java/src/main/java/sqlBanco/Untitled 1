@@ -13,10 +13,27 @@ COMMENT ON DATABASE postgres
 
 CREATE TABLE public.model_login
 (
+<<<<<<< HEAD
     login character varying(200) COLLATE pg_catalog."default",
     senha character varying(200) COLLATE pg_catalog."default",
     CONSTRAINT login_unique UNIQUE (login)
 )
+=======
+    id integer NOT NULL DEFAULT nextval('model_login_id_seq'::regclass),
+    login character varying(200) COLLATE pg_catalog."default",
+    senha character varying(200) COLLATE pg_catalog."default",
+    nome character varying(200) COLLATE pg_catalog."default",
+    snome character varying(200) COLLATE pg_catalog."default",
+    cpf character varying(200) COLLATE pg_catalog."default",
+    email character varying(200) COLLATE pg_catalog."default",
+    cidade character varying(200) COLLATE pg_catalog."default",
+    estado character varying(200) COLLATE pg_catalog."default",
+    cep character varying(200) COLLATE pg_catalog."default",
+    CONSTRAINT model_login_pkey PRIMARY KEY (id),
+    CONSTRAINT login_unique UNIQUE (login)
+)
+
+>>>>>>> branch 'main' of https://github.com/ederSilvaDev/Aula-21-44.git
 WITH (
     OIDS = FALSE
 )

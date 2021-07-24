@@ -389,6 +389,7 @@
 										<div>
 											<div class="col-md-2">
 												<button type="button"
+<<<<<<< HEAD
 													class="btn btn-primary btn-md btn-block waves-effect"
 													onclick="excluir();">Excluir</button>
 											</div>
@@ -444,6 +445,146 @@
 		}
 	</script>
 
+=======
+													class="btn btn-danger btn-md btn-block waves-effect"
+													onclick="excluir();" data-toggle="modal"
+													data-target="#exampleModalUsuario">Excluir</button>
+
+											</div>
+										</div>
+										<div>
+											<div class="col-md-2">
+												<button type="button"
+													class="btn btn-light btn-md btn-block waves-effect"
+													data-toggle="modal" data-target="#pesquisaModalUsuario">Pesquisar</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<span>${msg}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<jsp:include page="javascript.jsp"></jsp:include>
+
+	<!-- Modal -->
+	<div class="modal fade" id="pesquisaModalUsuario" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalCenterTitle"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Pesquisa de
+						Registros</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Pesquisa"
+							aria-label="nome" id="nomeBusca" aria-describedby="basic-addon2">
+					</div>
+					<table class="table" id="tabelaresultados">
+						<caption>Registros</caption>
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nome</th>
+								<th scope="col">CPF</th>
+								<th scope="col">Cep</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary"
+						onclick="buscarRegUser();">Buscar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<span id="totalResultados"></span>
+
+	<script type="text/javascript">
+		function buscarRegUser() {
+			var nomeBusca = document.getElementById('nomeBusca').value;
+
+			if (nomeBusca != null && nomeBusca != '' && nomeBusca.trim() != '') { /*Validando que tem que ter valor pra buscar no banco*/
+
+				var urlAction = document.getElementById('formUser').action;
+
+				$.ajax({
+
+					method : "get",
+					url : urlAction,
+					data : "nomeBusca=" + nomeBusca + '&acao=buscarUserAjax',
+					success : function(response) {
+
+					}
+
+				}).fail(
+						function(xhr, status, errorThrown) {
+							alert('Erro ao buscar usuário por nome: '
+									+ xhr.responseText);
+						});
+			}
+
+		}
+
+		function excluircomAjax() {
+			if (confirm("Deseja Excluir o Resgitro ?")) {
+
+				var urlAction = document.getElementById("formUser").action;
+				var idUser = document.getELementById("id").value;
+
+				$.ajax({
+
+					method : "get",
+					url : urlAction,
+					data : "id=" + idUser + '&acao=deletarajax',
+					success : function(response) {
+
+						limparForm();
+						document.getElementById('msg').textContent = response;
+					}
+
+				}).fail(
+						function(xhr, status, errorThrown) {
+							alert('Erro ao deletar usuario por Id:'
+									+ xhr.responseText);
+						});
+			}
+
+		}
+
+		function excluir() {
+			if (confirm("Deseja Excluir o Resgitro ?")) {
+
+				document.getElementById("formUser").method = 'get';
+				document.getElementById("acao").value = 'deletar';
+				document.getElementById("formUser").submit();
+			}
+		}
+
+		function limparForm() {
+			var elementos = document.getElementById("formUser").elements;
+			for (i = 0; i < elementos.length; i++) {
+				elementos[i].value = '';
+
+			}
+
+		}
+	</script>
+>>>>>>> branch 'main' of https://github.com/ederSilvaDev/Aula-21-44.git
 </body>
 </html>
 
